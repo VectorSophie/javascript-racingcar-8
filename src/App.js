@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import { validateCarNames, validateTryCount } from '../Validator.js';
+import { RacingGame } from './RacingGame.js';
+import { validateCarNames, validateTryCount } from './validator.js';
 
 class App {
   async run() {
@@ -13,6 +14,13 @@ class App {
 
       const tryCount = Number(inputTryCount); // using Number instead of operands
       validateTryCount(tryCount);
+
+      Console.print('\n실행 결과');
+      const game = new RacingGame(carNames);
+      game.play(tryCount);
+
+      const winners = game.getWinners();
+      Console.print(`\n최종 우승자 : ${winners.join(', ')}`);
 
     } catch(error) {
       Console.print(`[ERROR] ${error.message}`); // now use prefixes instead of hard coding them
