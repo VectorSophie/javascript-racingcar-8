@@ -45,16 +45,41 @@ describe("자동차 경주", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
+  describe("예외 테스트", () => {
+    test("이름을 입력하지 않음", async () => {
+      mockQuestions([""]);
+      const app = new App();
+      await expect(app.run()).rejects.toThrow("[ERROR] 이름을 입력해야 합니다.");
+    });
 
-  test("예외 테스트", async () => {
-    // given
-    const inputs = ["pobi,javaji"];
-    mockQuestions(inputs);
+    test("이름이 5자 초과", async () => {
+      mockQuestions(["pobijun"]);
+      const app = new App();
+      await expect(app.run()).rejects.toThrow("[ERROR] 이름은 5자 이하만 가능합니다.");
+    });
 
-    // when
-    const app = new App();
+    test("빈 이름 포함", async () => {
+      mockQuestions(["pobi,,jun"]);
+      const app = new App();
+      await expect(app.run()).rejects.toThrow("[ERROR] 빈 이름은 허용되지 않습니다.");
+    });
 
-    // then
-    await expect(app.run()).rejects.toThrow("[ERROR]");
+    test("시도 횟수가 숫자가 아님", async () => {
+      mockQuestions(["pobi,woni", "abc"]);
+      const app = new App();
+      await expect(app.run()).rejects.toThrow("[ERROR] 숫자를 입력해야 합니다.");
+    });
+
+    test("시도 횟수가 1 미만", async () => {
+      mockQuestions(["pobi,woni", "0"]);
+      const app = new App();
+      await expect(app.run()).rejects.toThrow("[ERROR] 시도 횟수는 1 이상이어야 합니다.");
+    });
+
+    test("시도 횟수가 정수가 아님", async () => {
+      mockQuestions(["pobi,woni", "3.5"]);
+      const app = new App();
+      await expect(app.run()).rejects.toThrow("[ERROR] 시도 횟수는 정수여야 합니다.");
+    });
   });
 });

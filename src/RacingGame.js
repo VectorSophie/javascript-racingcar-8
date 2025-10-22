@@ -1,4 +1,4 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 import { Car } from './Car.js';
 
 export class RacingGame {
@@ -18,9 +18,9 @@ export class RacingGame {
 
   printRound() {
     this.cars.forEach((car) => {
-      console.log(`${car.name} : ${'-'.repeat(car.position)}`);
+      Console.print(`${car.name} : ${'-'.repeat(car.position)}`);
     });
-    console.log('');
+    Console.print('');
   }
 
   getWinners() {

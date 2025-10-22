@@ -22,7 +22,8 @@ class App {
       Console.print(`\n최종 우승자 : ${winners.join(', ')}`);
 
     } catch(error) {
-      Console.print(`[ERROR] ${error.message}`); // now use prefixes instead of hard coding them
+      Console.print(error.message); // now use prefixes instead of hard coding them
+      throw error;
     }
   }
 }
