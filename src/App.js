@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { RacingGame } from './RacingGame.js';
-import { validateCarNames, validateTryCount } from './validator.js';
+import { validateCarNames, validateTryCount } from './Validator.js';
 
 class App {
   async run() {

@@ -61,7 +61,7 @@ describe("자동차 경주", () => {
     test("빈 이름 포함", async () => {
       mockQuestions(["pobi,,jun"]);
       const app = new App();
-      await expect(app.run()).rejects.toThrow("[ERROR] 빈 이름은 허용되지 않습니다.");
+      await expect(app.run()).rejects.toThrow("[ERROR] 이름을 입력해야 합니다.");
     });
 
     test("시도 횟수가 숫자가 아님", async () => {
